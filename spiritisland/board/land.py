@@ -1,0 +1,87 @@
+from enums import LandType, Entities
+from entities import Entity, Dahan, Explorer, Town, City, Presence, Blight
+
+
+class Land():
+    def __init__(
+            self,
+            land_type: LandType,
+            dahans: int = 0,
+            explorers: int = 0,
+            towns: int = 0,
+            cities: int = 0,
+            blight: int = 0,
+            presences: int = 0,
+            coastal: bool = False
+            ):
+        
+        self.type = land_type
+        self.coastal = coastal
+        self.dahans = []
+        self.explorers = []
+        self.towns = []
+        self.cities = []
+        self.presences = []
+        self.blight = []
+        self.neighbours = []
+
+        for _ in range(dahans):
+            self.add(Dahan())
+        for _ in range(explorers):
+            self.add(Explorer())
+        for _ in range(towns):
+            self.add(Town())
+        for _ in range(cities):
+            self.add(City())
+        for _ in range(presences):
+            self.add(Presence())
+        for _ in range(blight):
+            self.add(Blight())
+
+    def add(self, entity: Entity):
+        if isinstance(entity, Dahan):
+            self.dahans.append(entity)
+        elif isinstance(entity, Explorer):
+            self.explorers.append(entity)
+        elif isinstance(entity, Town):
+            self.towns.append(entity)
+        elif isinstance(entity, City):
+            self.cities.append(entity)
+        elif isinstance(entity, Presence):
+            self.presences.append(entity)
+        elif isinstance(entity, Blight):
+            self.blight.append(entity)
+        else:
+            raise TypeError(f'{type(entity)} is not a valid type.')
+    
+        
+    def remove(self, entity_code: Entities) -> Entity:
+        try: 
+            if entity_code == Entities.DAHAN:
+                return self.dahans.pop()
+            if entity_code == Entities.EXPLORER:
+                return self.explorers.pop()
+            if entity_code == Entities.TOWN:
+                return self.towns.pop()
+            if entity_code == Entities.CITY:
+                return self.cities.pop()
+            if entity_code == Entities.PRESENCE:
+                return self.presences.pop()
+            if entity_code == Entities.BLIGHT:
+                return self.blight.pop()
+            else:
+                raise TypeError(f'{entity_code.name.title()} is not a valid Entity.')
+        except IndexError:
+            raise TypeError(f'Tried to pop from list: {entity_code.name.title()} but was empty.')
+    
+    def add_neighbour(self, neighbour: "Land"):
+        self.neighbours.append(neighbour)
+    
+        
+    
+    
+        
+            
+
+        
+
