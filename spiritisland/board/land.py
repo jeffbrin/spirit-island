@@ -29,6 +29,7 @@ class Land:
         self.presences = []
         self.blight = []
         self.neighbours = []
+        self.invader_damage = len(explorers)*Explorer.damage + len(towns)*Town.damage + len(cities)*City.damage
         
 
         for _ in range(dahans):
