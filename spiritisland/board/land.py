@@ -2,20 +2,25 @@ from enums import LandType, Entities
 from entities import Entity, Dahan, Explorer, Town, City, Presence, Blight
 
 
-class Land():
+class Land:
     def __init__(
             self,
             land_type: LandType,
+            land_ID: int,
             dahans: int = 0,
             explorers: int = 0,
             towns: int = 0,
             cities: int = 0,
             blight: int = 0,
             presences: int = 0,
-            coastal: bool = False
+            coastal: bool = False,
             ):
         
-        self.type = land_type
+        self.land_type = land_type
+        if 1 <= land_ID <= 8:
+            self.land_ID = land_ID
+        else:
+            raise ValueError(f'Land_ID must be between 1 and 8. {land_ID} is not a valid land ID.')
         self.coastal = coastal
         self.dahans = []
         self.explorers = []
@@ -24,6 +29,7 @@ class Land():
         self.presences = []
         self.blight = []
         self.neighbours = []
+        
 
         for _ in range(dahans):
             self.add(Dahan())
@@ -53,8 +59,7 @@ class Land():
             self.blight.append(entity)
         else:
             raise TypeError(f'{type(entity)} is not a valid type.')
-    
-        
+       
     def remove(self, entity_code: Entities) -> Entity:
         try: 
             if entity_code == Entities.DAHAN:
@@ -76,6 +81,28 @@ class Land():
     
     def add_neighbour(self, neighbour: "Land"):
         self.neighbours.append(neighbour)
+    
+    def available_target_lands(self, starting_land: "Land", distance: int) -> list:
+        def adding_lands(previous_list):
+            temp = [i for i in previous_list]
+            for i in previous_list:
+                for j in i.neighbours:
+                    if j not in temp:
+                        temp.append(j)
+            return temp
+        
+        range0 = [starting_land]
+        result = range0
+        for _ in range(0,distance):
+            result = adding_lands(result)
+        return result
+    
+        
+    
+    
+        
+
+    
     
         
     
