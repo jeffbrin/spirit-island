@@ -1,4 +1,4 @@
 from .gamestate import GameState
 
-class InvaderCards(GameState):
+class InvaderCard(GameState):
     pass

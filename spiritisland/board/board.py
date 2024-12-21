@@ -2,14 +2,16 @@ from board import Land
 from entities import Entity, Dahan, Explorer, Town, City, Presence, Blight
 from enums import LandType, Entities
 class Board():
+
     def __init__(self):
         self.lands = []
-    
+
+    @staticmethod
     def choose_board():
         board = input(f'Choose Board from A, B, C, D: ').upper()
         while board not in {'A', 'B', 'C', 'D'}:
             print(f'Board {board} was not in options')
-            return choose_board()
+            return Board.choose_board()
         
         def enter_neighbours(initial_land, neighbours: list):
                 for i in neighbours:

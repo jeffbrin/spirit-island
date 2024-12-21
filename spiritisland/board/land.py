@@ -29,7 +29,6 @@ class Land:
         self.presences = []
         self.blight = []
         self.neighbours = []
-        self.invader_damage = len(explorers)*Explorer.damage + len(towns)*Town.damage + len(cities)*City.damage
         
 
         for _ in range(dahans):
@@ -44,6 +43,10 @@ class Land:
             self.add(Presence())
         for _ in range(blight):
             self.add(Blight())
+
+    @property
+    def invader_damage(self) -> int:
+        return len(self.explorers)*Explorer.damage + len(self.towns)*Town.damage + len(self.cities)*City.damage
 
     def add(self, entity: Entity):
         if isinstance(entity, Dahan):
@@ -94,7 +97,7 @@ class Land:
         
         range0 = [starting_land]
         result = range0
-        for _ in range(0,distance):
+        for _ in range(distance):
             result = adding_lands(result)
         return result
     
