@@ -27,6 +27,7 @@ class Land:
         self.presences = []
         self.blight = []
         self.neighbours = []
+        self.defense = 0
         
 
         for _ in range(dahans):
@@ -102,7 +103,7 @@ class Land:
         # TODO: Add Defense Stuff
 
         #removing dahans 
-        nb_dead_dahans = int(self.invader_damage / 2)
+        nb_dead_dahans = int((self.invader_damage - self.defense) / 2)
         for _ in range(nb_dead_dahans):
             self.remove(Entities.DAHAN)
 
@@ -120,3 +121,9 @@ class Land:
         blight_pool.remove()
         self.remove(Entities.PRESENCE)
         return len(self.blight) > 1
+
+    def defend(self, defense: int) -> None:
+        self.defense += defense
+
+    def pass_time(self) -> None:
+        self.defense = 0

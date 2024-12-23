@@ -1,4 +1,3 @@
-
-
 class GameState():
-    pass
+    def __init__(self):
+        pass
