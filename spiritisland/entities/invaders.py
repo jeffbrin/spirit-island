@@ -1,4 +1,4 @@
-from .entity import Entity
+from . import Entity
 
 class Invader(Entity):
     def __init__(self, damage: int, health: int, fear_generation: int):

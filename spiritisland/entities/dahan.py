@@ -1,4 +1,4 @@
-from .entity import Entity
+from . import Entity
 
 class Dahan(Entity):
     DAMAGE = 2

@@ -1,13 +1,13 @@
-from .gamestate import GameState
 
-class BlightPool(GameState):
-    def __init__(self, blightpool: int = 5):
-        self.blightpool = blightpool
-        # TODO NEED TO ADD LOSING CONDITION IF BLIGHTPOOL = 0
+class BlightPool():
+    def __init__(self, blight_count: int = 5):
+        self.blight_count = blight_count
         
-    def add_to_pool(self):
-        return self.blightpool + 1
+    def add(self) -> int:
+        self.blight_count += 1
+        return self.blight_count
         
-    def remove_to_pool(self):
-        return self.blightpool - 1
+    def remove(self) -> int:
+        self.blight_count -= 1
+        return self.blight_count
         

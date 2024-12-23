@@ -1,4 +1,4 @@
-from .entity import Entity
+from . import Entity
 
 class Presence(Entity):
     def __init__(self):

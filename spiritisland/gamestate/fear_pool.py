@@ -1,17 +1,12 @@
 from gamestate import GameState
 
 class FearPool(GameState):
-    def __init__(self, fearpool: int = 5):
-        self.fearpool = fearpool
+    def __init__(self, fear_count: int = 5):
+        self.fear_count = fear_count
+        self.max_fear = fear_count
 
     def reset_pool(self):
-        self.fearpool + 5
+        self.fear_count = self.max_fear
         
-    def remove_from_pool(self):
-        self.fearpool -1
-        if FearPool.fearpool == 0:
-            FearPool.reset_pool()
-
-            
-    
-    
+    def generate_fear(self):
+        self.fear_count -= 1

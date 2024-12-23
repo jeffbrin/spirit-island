@@ -1,5 +1,6 @@
 from enums import LandType, Entities
 from entities import Entity, Dahan, Explorer, Town, City, Presence, Blight
+from gamestate import BlightPool
 
 
 class Land:
@@ -97,18 +98,25 @@ class Land:
             result = add_lands(result)
         return result
     
-        
-    
-    
-        
+    def take_damage_from_invaders(self, blight_pool: BlightPool) -> None:
+        # TODO: Add Defense Stuff
 
-    
-    
-        
-    
-    
-        
-            
+        #removing dahans 
+        nb_dead_dahans = int(self.invader_damage / 2)
+        for _ in range(nb_dead_dahans):
+            self.remove(Entities.DAHAN)
 
+        if self.invader_damage >= 2:
+            return self.add_blight(blight_pool)
         
+        return False
+    
+    def add_blight(self, blight_pool: BlightPool) -> bool:
+        """
+        Adds blight to the land, returns True if another blight has to be added to a neighbouring land.
+        """
 
+        self.add(Blight())
+        blight_pool.remove()
+        self.remove(Entities.PRESENCE)
+        return len(self.blight) > 1
