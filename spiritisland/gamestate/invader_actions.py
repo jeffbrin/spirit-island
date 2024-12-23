@@ -7,12 +7,12 @@ import numpy as np
 
 
 class InvaderActions(GameState):
-    def __init__(self, ravage_land: InvaderCard, build_land: InvaderCard, explore_Land: InvaderCard):
+    def __init__(self, ravage_land: InvaderCard, build_land: InvaderCard, explore_land: InvaderCard):
         self.ravage_land = ravage_land
         self.build_land = build_land
-        self.explore_land = explore_Land
+        self.explore_land = explore_land
 
-    def ravage(self, ravage_land: LandType):
+    def ravage(self, ravage_land: list[LandType]):
         for land in Board.lands:
             if land.land_type in ravage_land and land.invader_damage != 0:
                 # TODO: Need to add defense condition
@@ -49,7 +49,7 @@ class InvaderActions(GameState):
                 if land.invader_damage >= 2:
                     add_blight(land)
     
-    def explore(self, explore_land):
+    def explore(self, explore_land: InvaderCard):
         def neighbour_city_town(land: Land):
             for i in land.neighbours:
                 if len(i.towns) > 0 or len(i.cities) > 0:
