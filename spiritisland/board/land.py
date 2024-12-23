@@ -17,10 +17,7 @@ class Land:
             ):
         
         self.land_type = land_type
-        if 1 <= land_ID <= 8:
-            self.land_ID = land_ID
-        else:
-            raise ValueError(f'Land_ID must be between 1 and 8. {land_ID} is not a valid land ID.')
+        self.id = land_ID
         self.coastal = coastal
         self.dahans = []
         self.explorers = []

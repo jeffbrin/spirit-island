@@ -1,5 +1,4 @@
 from .entity import Entity
-from  board import Land
 
 class Invader(Entity):
     pass
