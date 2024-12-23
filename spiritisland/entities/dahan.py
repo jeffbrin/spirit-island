@@ -1,7 +1,8 @@
 from .entity import Entity
 
 class Dahan(Entity):
-    def __init__(self):
-        self.damage = 2
-        self.health = 2
+    DAMAGE = 2
+    HEALTH = 2
 
+    def __init__(self):
+        super().__init__(Dahan.DAMAGE, Dahan.HEALTH)

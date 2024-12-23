@@ -83,8 +83,8 @@ class Land:
     def add_neighbour(self, neighbour: "Land"):
         self.neighbours.append(neighbour)
     
-    def available_target_lands(self, starting_land: "Land", distance: int) -> list:
-        def adding_lands(previous_list):
+    def available_target_lands(self, distance: int) -> list:
+        def add_lands(previous_list):
             temp = [i for i in previous_list]
             for i in previous_list:
                 for j in i.neighbours:
@@ -92,10 +92,9 @@ class Land:
                         temp.append(j)
             return temp
         
-        range0 = [starting_land]
-        result = range0
+        result = [self]
         for _ in range(distance):
-            result = adding_lands(result)
+            result = add_lands(result)
         return result
     
         

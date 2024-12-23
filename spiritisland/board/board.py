@@ -15,7 +15,7 @@ class Board():
                         8 : {'land_type': LandType.GRASSLAND, 'land_ID': 8, 'coastal': False}
                     },
                     'neighbors': {
-                        1: (2, 4, 5,6),
+                        1: (2, 4, 5, 6),
                         2: (1, 3, 4),
                         3: (2, 4),
                         4: (1, 2, 3, 5),
