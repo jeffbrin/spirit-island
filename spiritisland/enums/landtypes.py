@@ -5,3 +5,4 @@ class LandType(Enum):
     MOUNTAIN = 1
     GRASSLAND = 2
     SAND = 3
+    COASTAL = 4

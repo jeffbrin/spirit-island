@@ -1,20 +1,20 @@
+from enums import Step
+from spirits import Spirit
 from board import Board
+from gamestate import BlightPool, FearPool, InvaderBoard
 
-board = Board.choose_board('A')
-
-for id, land in board.lands.items():
-    print(id, [n.id for n in land.neighbours])
-
-land = board.lands[1]
-print(land.id)
-
-targets = land.available_target_lands(2)
-print([t.id for t in targets])
-
-
-values = [1,2,3,4,5,6,7]
-temp = ''
-for i in values:
-    temp = temp + str(i)
-
-print(temp)
+class Game:
+    def __init__(self, spirit: Spirit, board_choice: str):
+        
+        self.board = Board.choose_board(board_choice)
+        self.spirit = spirit
+        self.step = Step.GROWTH
+        # TODO: Change size when there are multiple spirits
+        self.blight_pool = BlightPool()
+        self.fear_pool = FearPool()
+        self.invader_actions = InvaderBoard()
+    
+    def run_step(self, choices: list):
+        match self.step:
+            case Step.GROWTH:
+                ...
