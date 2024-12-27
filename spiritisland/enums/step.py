@@ -18,5 +18,12 @@ class Step(Enum):
     PICK_BLIGHT_LAND = 4
     # When doing damage to invaders, pick how many cities, dahan, towns to kill
     PICK_INVADERS_TO_KILL_ON_LAND = 5
-    # Pickt the order in which slow cards will be resolved
+    # Pick the order in which slow cards will be resolved
     PICK_SLOW_CARDS_ORDER = 6
+    # Pick the Presence track to take presence off of
+    PICK_PRESENCE_TRACK = 10
+    # Pick the growth option from the top of the spirit card
+    PICK_GROWTH_OPTION = 11
+    # Pick power card
+    PICK_POWER_CARD = 12
+    
