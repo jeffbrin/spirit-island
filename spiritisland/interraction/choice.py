@@ -4,6 +4,13 @@ class Choice:
     def __init__(self) -> None:
         pass
 
+class PlayCardChoice(Choice):
+    def __init__(self, card_id: int):
+        self.card_id = card_id
+
+    def validate_choice_given_constraints(self, available_power_ids: list[int]) -> bool:
+        return self.card_id in available_power_ids
+
 class GrowthChoice(Choice):
     def __init__(self, option: int) -> None:
         self.option = option

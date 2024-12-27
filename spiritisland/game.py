@@ -2,7 +2,7 @@ from enums import Step
 from spirits import Spirit, GrowthComponent
 from board import Board
 from gamestate import BlightPool, FearPool, InvaderBoard
-from interraction import Choice, GrowthChoice, ActionChoice
+from interraction import Choice, GrowthChoice, ActionChoice, PlayCardChoice
 from powers import Power
 
 from typing import Optional
@@ -66,8 +66,6 @@ class Game:
         """        
 
         match step:
-            case Step.GROWTH:
-                self.perform_growth(spirit, choices)
             case Step.PLAY_CARDS:
                 self.play_cards(spirit, choices)
             case Step.PICK_FAST_CARDS_ORDER:
@@ -87,8 +85,12 @@ class Game:
                 self.place_presence(spirit, choices)
             case Step.PICK_ONE_OF_4_MINOR_CARDS:
                 self.add_power_card_to_hand(spirit, choices)
+            case Step.PICK_PRESENCE_TRACK:
+                pass
+            case Step.PICK_GROWTH_OPTION:
+                pass
 
-    def perform_growth(self, spirit: Spirit, choices: list[Choice]) -> None:
+    def perform_growth(self, spirit: Spirit, choices: list[GrowthChoice]) -> None:
         if not all([isinstance(choice, GrowthChoice) for choice in choices]):
             raise ValueError(
                 f"All choices must be growth choices. Received: {choices}")
@@ -112,6 +114,16 @@ class Game:
                     spirit.place_presence(growth_option[1])
                 case GrowthComponent.GAIN_ENERGY:
                     spirit.gain_energy(growth_option[1])
+
+    def play_cards(self, spirit: Spirit, choices: list[PlayCardChoice]) -> None:
+        if not all([isinstance(choice, PlayCardChoice) for choice in choices]):
+            raise TypeError(f"Expected only PlayCardChoice, received {choices}")
+        
+        for choice in choices:
+            if not choice.validate_choice_given_constraints(list(spirit.hand.keys())):
+                raise ValueError(f'Received invalid card choice: {choice.card_id}. Available: {[x for x in spirit.hand.keys()]}')
+
+            spirit.play_power(choice.card_id)
 
     def pick_power_card(self) -> Power:
         raise NotImplementedError("Need to implement power card picking")
