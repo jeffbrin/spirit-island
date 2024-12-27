@@ -24,6 +24,3 @@ class Step(Enum):
     PICK_PRESENCE_TRACK = 10
     # Pick the growth option from the top of the spirit card
     PICK_GROWTH_OPTION = 11
-    # Pick power card
-    PICK_POWER_CARD = 12
-    
