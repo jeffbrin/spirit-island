@@ -12,7 +12,8 @@ class Step(Enum):
     # Pick the order in which fast action cards will be resolved
     PICK_FAST_CARDS_ORDER = 2
     # Given a list of (Pull, Push, Damage, ...), decide how to use them.
-    PERFORM_ACTIONS = 3
+    PERFORM_FAST_ACTIONS = 3
+    PERFORM_SLOW_ACTIONS = 9
     # Pick a land to place blight on
     PICK_BLIGHT_LAND = 4
     # When doing damage to invaders, pick how many cities, dahan, towns to kill
