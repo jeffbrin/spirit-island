@@ -8,7 +8,7 @@ from powers import Power
 from typing import Optional
 
 class Game:
-    def __init__(self, spirit: Spirit, board_choice: str, minor_powers: list[Power]):
+    def __init__(self, spirit: Spirit, board_choice: str, minor_powers: list[Power], ai_mode: bool = True):
         
         self.board = Board.choose_board(board_choice)
         self.spirit = spirit
@@ -22,12 +22,13 @@ class Game:
         self.major_powers = []
         self.rejected_minor_powers = []
         self.rejected_major_powers = []
+        self.ai_mode = ai_mode
     
-    def run(self) -> None:
-        while not self.is_game_over():
-            choices = self.get_choices_for_step(self.step)
-            self.run_step(self.step, choices, self.spirit)
-            self.next_step()
+    # def run(self) -> None:
+    #     while not self.is_game_over():
+    #         choices = self.get_choices_for_step(self.step)
+    #         self.run_step(self.step, choices, self.spirit)
+    #         self.next_step()
 
     def next_step(self) -> None:
         match self.step:
@@ -36,7 +37,7 @@ class Game:
             case Step.PLAY_CARDS:
                 self.step = Step.PICK_FAST_CARDS_ORDER
             case Step.PICK_FAST_CARDS_ORDER:
-                self.step = Step.PERFORM_ACTIONS
+                self.step = Step.PERFORM_FAST_ACTIONS
             case Step.PERFORM_FAST_ACTIONS:
                 self.step = Step.PICK_SLOW_CARDS_ORDER
             case Step.PICK_SLOW_CARDS_ORDER:
@@ -44,10 +45,10 @@ class Game:
             case Step.PERFORM_SLOW_ACTIONS:
                 self.step = Step.GROWTH
 
-    def get_choices_for_step(self, step: Step) -> list[Choice]:
-        # TODO: Communicate with the model to get their choices for the current step, and
-        # return them.
-        ...
+    # def get_choices_for_step(self, step: Step) -> list[Choice]:
+    #     # TODO: Communicate with the model to get their choices for the current step, and
+    #     # return them.
+    #     ...
 
     def run_step(self, step: Step, choices: list[Choice], 
                  spirit: Optional[Spirit] = None) -> None:
@@ -90,30 +91,30 @@ class Game:
             case Step.PICK_GROWTH_OPTION:
                 pass
 
-    def perform_growth(self, spirit: Spirit, choices: list[GrowthChoice]) -> None:
-        if not all([isinstance(choice, GrowthChoice) for choice in choices]):
-            raise ValueError(
-                f"All choices must be growth choices. Received: {choices}")
+    # def perform_growth(self, spirit: Spirit, choices: list[GrowthChoice]) -> None:
+    #     if not all([isinstance(choice, GrowthChoice) for choice in choices]):
+    #         raise ValueError(
+    #             f"All choices must be growth choices. Received: {choices}")
         
-        if len(choices) != 1:
-            raise ValueError(
-                f"Only one growth choice is allowed, received {len(choices)}")
+    #     if len(choices) != 1:
+    #         raise ValueError(
+    #             f"Only one growth choice is allowed, received {len(choices)}")
         
-        choice = choices[0]
-        if not choice.validate_choice_given_constraints(len(spirit.growth_options)):
-            raise ValueError(f"Invalid growth choice: {choice.option}.")
+    #     choice = choices[0]
+    #     if not choice.validate_choice_given_constraints(len(spirit.growth_options)):
+    #         raise ValueError(f"Invalid growth choice: {choice.option}.")
         
-        # Growth Option
-        for growth_option in spirit.growth_options[choice.option].actions:
-            match growth_option[0]:
-                case GrowthComponent.RECLAIM_CARDS:
-                    spirit.reclaim_all_cards()
-                case GrowthComponent.GAIN_POWER_CARD:
-                    spirit.gain_power(self.pick_power_card())
-                case GrowthComponent.PLACE_PRESENCE:
-                    spirit.place_presence(growth_option[1])
-                case GrowthComponent.GAIN_ENERGY:
-                    spirit.gain_energy(growth_option[1])
+    #     # Growth Option
+    #     for growth_option in spirit.growth_options[choice.option].actions:
+    #         match growth_option[0]:
+    #             case GrowthComponent.RECLAIM_CARDS:
+    #                 spirit.reclaim_all_cards()
+    #             case GrowthComponent.GAIN_POWER_CARD:
+    #                 spirit.gain_power(self.pick_power_card())
+    #             case GrowthComponent.PLACE_PRESENCE:
+    #                 spirit.place_presence(growth_option[1])
+    #             case GrowthComponent.GAIN_ENERGY:
+    #                 spirit.gain_energy(growth_option[1])
 
     def play_cards(self, spirit: Spirit, choices: list[PlayCardChoice]) -> None:
         if not all([isinstance(choice, PlayCardChoice) for choice in choices]):
@@ -124,6 +125,15 @@ class Game:
                 raise ValueError(f'Received invalid card choice: {choice.card_id}. Available: {[x for x in spirit.hand.keys()]}')
 
             spirit.play_power(choice.card_id)
+        
+        if self.ai_mode:
+            self.next_step()
+
+    def pick_fast_cards_order(self, spirit: Spirit, choices: list[Choice]):
+        pass
+
+    def do_actions(self, spirit: Spirit):
+        pass
 
     def pick_power_card(self) -> Power:
         raise NotImplementedError("Need to implement power card picking")
