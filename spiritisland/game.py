@@ -137,3 +137,5 @@ class Game:
 
     def pick_power_card(self) -> Power:
         raise NotImplementedError("Need to implement power card picking")
+    
+    def pick_growth_option(self)

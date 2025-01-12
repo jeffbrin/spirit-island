@@ -6,13 +6,13 @@ class Board():
             'A': {
                 'lands':{
                         1 : {'land_type': LandType.MOUNTAIN, 'land_ID': 1, 'coastal': True},
-                        2 : {'land_type': LandType.WETLAND, 'land_ID': 2, 'coastal': True},
-                        3 : {'land_type': LandType.GRASSLAND, 'land_ID': 3, 'coastal': True},
-                        4 : {'land_type': LandType.SAND, 'land_ID': 4, 'coastal': False},
+                        2 : {'land_type': LandType.WETLAND, 'land_ID': 2, 'coastal': True, 'dahans' : 1, 'cities' : 1},
+                        3 : {'land_type': LandType.GRASSLAND, 'land_ID': 3, 'coastal': True, 'dahans' : 2},
+                        4 : {'land_type': LandType.SAND, 'land_ID': 4, 'coastal': False, 'blight' : 1},
                         5 : {'land_type': LandType.WETLAND, 'land_ID': 5, 'coastal': False},
-                        6 : {'land_type': LandType.MOUNTAIN, 'land_ID': 6, 'coastal': False},
-                        7 : {'land_type': LandType.SAND, 'land_ID': 7, 'coastal': False},
-                        8 : {'land_type': LandType.GRASSLAND, 'land_ID': 8, 'coastal': False}
+                        6 : {'land_type': LandType.MOUNTAIN, 'land_ID': 6, 'coastal': False, 'dahans' : 1},
+                        7 : {'land_type': LandType.SAND, 'land_ID': 7, 'coastal': False, 'dahans' : 2},
+                        8 : {'land_type': LandType.GRASSLAND, 'land_ID': 8, 'coastal': False, 'towns' : 1}
                     },
                     'neighbors': {
                         1: (2, 4, 5, 6),
@@ -27,14 +27,14 @@ class Board():
             },
             'B': {
                 'lands': {
-                    1 : {'land_type': LandType.WETLAND, 'land_ID': 1, 'coastal': True},
-                    2 : {'land_type': LandType.MOUNTAIN, 'land_ID': 2, 'coastal': True},
-                    3 : {'land_type': LandType.SAND, 'land_ID': 3, 'coastal': True},
-                    4 : {'land_type': LandType.GRASSLAND, 'land_ID': 4, 'coastal': False},
+                    1 : {'land_type': LandType.WETLAND, 'land_ID': 1, 'coastal': True, 'dahans' : 1},
+                    2 : {'land_type': LandType.MOUNTAIN, 'land_ID': 2, 'coastal': True, 'cities' : 1},
+                    3 : {'land_type': LandType.SAND, 'land_ID': 3, 'coastal': True, 'dahans' : 2},
+                    4 : {'land_type': LandType.GRASSLAND, 'land_ID': 4, 'coastal': False, 'blight' : 1},
                     5 : {'land_type': LandType.SAND, 'land_ID': 5, 'coastal': False},
-                    6 : {'land_type': LandType.WETLAND, 'land_ID': 6, 'coastal': False},
-                    7 : {'land_type': LandType.MOUNTAIN, 'land_ID': 7, 'coastal': False},
-                    8 : {'land_type': LandType.GRASSLAND, 'land_ID': 8, 'coastal': False}
+                    6 : {'land_type': LandType.WETLAND, 'land_ID': 6, 'coastal': False, 'towns' : 1},
+                    7 : {'land_type': LandType.MOUNTAIN, 'land_ID': 7, 'coastal': False, 'dahans' : 1},
+                    8 : {'land_type': LandType.GRASSLAND, 'land_ID': 8, 'coastal': False, 'dahans' : 2}
                 },
                 'neighbors': {
                     1: (2, 4, 5, 6),
@@ -49,13 +49,13 @@ class Board():
             },
             'C': {
                 'lands': {
-                    1 : {'land_type': LandType.GRASSLAND, 'land_ID': 1, 'coastal': True},
-                    2 : {'land_type': LandType.SAND, 'land_ID': 2, 'coastal': True},
-                    3 : {'land_type': LandType.MOUNTAIN, 'land_ID': 3, 'coastal': True},
+                    1 : {'land_type': LandType.GRASSLAND, 'land_ID': 1, 'coastal': True, 'dahans' : 1},
+                    2 : {'land_type': LandType.SAND, 'land_ID': 2, 'coastal': True}, 'cities' : 1,
+                    3 : {'land_type': LandType.MOUNTAIN, 'land_ID': 3, 'coastal': True, 'dahans' : 2},
                     4 : {'land_type': LandType.GRASSLAND, 'land_ID': 4, 'coastal': False},
-                    5 : {'land_type': LandType.WETLAND, 'land_ID': 5, 'coastal': False},
-                    6 : {'land_type': LandType.SAND, 'land_ID': 6, 'coastal': False},
-                    7 : {'land_type': LandType.MOUNTAIN, 'land_ID': 7, 'coastal': False},
+                    5 : {'land_type': LandType.WETLAND, 'land_ID': 5, 'coastal': False, 'dahans' : 2, 'blight' : 1},
+                    6 : {'land_type': LandType.SAND, 'land_ID': 6, 'coastal': False, 'dahans' : 1},
+                    7 : {'land_type': LandType.MOUNTAIN, 'land_ID': 7, 'coastal': False, 'towns' : 1},
                     8 : {'land_type': LandType.WETLAND, 'land_ID': 8, 'coastal': False}
                 },
                 'neighbors': {
@@ -71,13 +71,13 @@ class Board():
             },
             'D': {
                 'lands': {
-                    1 : {'land_type': LandType.WETLAND, 'land_ID': 1, 'coastal': True},
-                    2 : {'land_type': LandType.GRASSLAND, 'land_ID': 2, 'coastal': True},
+                    1 : {'land_type': LandType.WETLAND, 'land_ID': 1, 'coastal': True, 'dahans' : 2},
+                    2 : {'land_type': LandType.GRASSLAND, 'land_ID': 2, 'coastal': True, 'dahans' : 1, 'cities' : 1},
                     3 : {'land_type': LandType.WETLAND, 'land_ID': 3, 'coastal': True},
                     4 : {'land_type': LandType.SAND, 'land_ID': 4, 'coastal': False},
-                    5 : {'land_type': LandType.MOUNTAIN, 'land_ID': 5, 'coastal': False},
+                    5 : {'land_type': LandType.MOUNTAIN, 'land_ID': 5, 'coastal': False, 'dahans' : 1, 'blight' : 1},
                     6 : {'land_type': LandType.GRASSLAND, 'land_ID': 6, 'coastal': False},
-                    7 : {'land_type': LandType.SAND, 'land_ID': 7, 'coastal': False},
+                    7 : {'land_type': LandType.SAND, 'land_ID': 7, 'coastal': False, 'dahans' : 2, 'towns' : 1},
                     8 : {'land_type': LandType.MOUNTAIN, 'land_ID': 8, 'coastal': False}
                 },
                 'neighbors': {
@@ -114,3 +114,4 @@ class Board():
                 board.lands[id].add_neighbour(board.lands[neighbor_id])
 
         return board
+    
